@@ -59,6 +59,7 @@
     background: #ffffff;
     border-radius: 15px;
     border: dotted 1px #666;
+    margin: 2px;
     content: 2px;
     padding: 2px; }
     table.border, th.border, td.border {
@@ -71,7 +72,7 @@
     <div class="content">
       <j:set var="spc" value="&amp;nbsp;&amp;nbsp;" />
       <!-- GENERAL INFO -->
-      <table class="border">
+      <table>
         <tr>
           <td align="right">
             <j:choose>
@@ -171,7 +172,7 @@
       <j:set var="healthReports" value="${project.buildHealthReports}" />
       <j:if test="${healthReports!=null}">
         <h1>Health Report</h1>
-        <table class="border">
+        <table>
           <tr>
             <th>W</th>
             <th>Description</th>
