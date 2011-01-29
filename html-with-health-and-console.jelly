@@ -69,7 +69,7 @@
     <div class="content">
       <j:set var="spc" value="&amp;nbsp;&amp;nbsp;" />
       <!-- GENERAL INFO -->
-      <table>
+      <table class="border">
         <tr>
           <td align="right">
             <j:choose>
