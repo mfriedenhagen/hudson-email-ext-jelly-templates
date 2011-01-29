@@ -49,6 +49,8 @@
     }
     td.test_failed {
     color:red; }
+    td.test_skipped {
+    color:grey; }
     td.console {
     font-family:Courier
     New, monotype;
@@ -169,7 +171,7 @@
       <j:set var="healthReports" value="${project.buildHealthReports}" />
       <j:if test="${healthReports!=null}">
         <h1>Health Report</h1>
-        <table>
+        <table class="border">
           <tr>
             <th>W</th>
             <th>Description</th>
@@ -256,17 +258,15 @@
                 <td class="border">
                   <tt>${packageResult.getName()}</tt>
                 </td>
-                <td class="border">${packageResult.getFailCount()}</td>
-                <td class="border">${packageResult.getPassCount()}</td>
-                <td class="border">${packageResult.getSkipCount()}</td>
-                <td class="border">${packageResult.getPassCount()+packageResult.getFailCount()+packageResult.getSkipCount()}</td>
+                <td class="border test_failed">${packageResult.getFailCount()}</td>
+                <td class="border test_passed">${packageResult.getPassCount()}</td>
+                <td class="border test_skipped">${packageResult.getSkipCount()}</td>
+                <td class="border"><b>${packageResult.getPassCount()+packageResult.getFailCount()+packageResult.getSkipCount()}</b></td>
               </tr>
               <j:forEach var="failed_test" items="${packageResult.getFailedTests()}">
-                <tr bgcolor="white">
-                  <td class="test_failed border" colspan="5">
-                    <b>
-                      <li>Failed: ${failed_test.getFullName()} </li>
-                    </b>
+                <tr>
+                  <td class="test_failed" colspan="5">
+                    <tt>${failed_test.getFullName()}</tt>
                   </td>
                 </tr>
               </j:forEach>
