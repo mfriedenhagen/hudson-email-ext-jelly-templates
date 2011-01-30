@@ -9,7 +9,7 @@
     body {
     background: #f5f5dc;
     }
-    h1 {
+    h1, h2 {
     border-bottom:dotted 1px #999999;
     padding:5px;
     margin-top:10px;
@@ -21,30 +21,19 @@
     border-radius: 15px;
     }
     h2 {
-    border-bottom:dotted 1px #999999;
     padding:5px;
     margin-top:5px;
     margin-bottom:5px;
-    color:
-    #000000;
     font: italic bold 110%
-    Georgia,Serif;
-    background-color:#F0F0F0;
-    width: 100%;
-    border-radius: 15px;
+    }
+    .bg2 {
+    color:black;
+    background-color:#E0E0E0;
+    font-size:110%
     }
     th {
     font-weight: bold;
     }
-    .bg1 { color:black;
-    background-color:#F0F0F0;
-    font-size:120% }
-    .bg2 {
-    color:black;
-    background-color:#E0E0E0; font-size:110% }
-    .bg3 {
-    color:white;
-    background-color:#8080FF; }
     tr, td, th {
     padding:2px;
     }
@@ -52,21 +41,24 @@
     color:blue;
     }
     td.test_failed {
-    color:red; }
+    color:red;
+    }
     td.test_skipped {
-    color:grey; }
+    color:grey;
+    }
     td.console {
-    font-family:Courier
-    New, monotype;
+    font-family:Courier New, monotype;
     }
     div.content, div.header {
+    width: 100%;
     background: #ffffff;
     border-radius: 15px;
     border: dotted
     1px #666;
     margin: 2px;
     content: 2px;
-    padding: 2px; }
+    padding: 2px;
+    }
     table.border, th.border, td.border {
     border: 1px solid black;
     border-collapse:collapse;
