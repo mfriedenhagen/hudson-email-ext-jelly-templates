@@ -353,9 +353,9 @@
         <h1>Console Output</h1>
       </a>
       <pre class="console">
-        <j:forEach var="line" items="${build.getLog(50)}">
-          ${line}<br />
-        </j:forEach>
+<j:forEach var="line" items="${build.getLog(50)}">
+${line}<br />
+</j:forEach>
       </pre>
       <br />
     </div>
