@@ -17,14 +17,14 @@
     color: #000000;
     font: normal bold 130% Georgia,Serif;
     background-color:#f0f0f0;
-    width: 100%;
+    width: 85%;
     border-radius: 15px;
     }
     h2 {
     padding:5px;
     margin-top:5px;
     margin-bottom:5px;
-    font: italic bold 110%
+    font: italic bold 110% Georgia,Serif;
     }
     .bg2 {
     color:black;
@@ -50,7 +50,7 @@
     font-family:Courier New, monotype;
     }
     div.content, div.header {
-    width: 100%;
+    width: 90%;
     background: #ffffff;
     border-radius: 15px;
     border: dotted
@@ -135,33 +135,22 @@
         <a href="${rooturl}${build.url}/changes">
           <h1>Changes</h1>
         </a>
-        <table width="100%">
           <j:forEach var="cs" items="${changeSet.logs}" varStatus="loop">
             <j:set var="hadChanges" value="true" />
-            <tr>
-              <td colspan="2" class="bg2">
-                ${spc}Revision
-                <b>${cs.revision}</b>
-                by
-                <i>${cs.author}</i>
-                <br />
-                ${spc}
-                <i>(${cs.msgAnnotated})</i>
-              </td>
-            </tr>
-            <j:forEach var="p" items="${cs.affectedFiles}">
-              <tr>
-                <td width="10%">${spc}${p.editType.name}</td>
-                <td>${p.path}</td>
-              </tr>
-            </j:forEach>
+            <h2>${spc}Revision ${cs.revision} by ${cs.author}</h2>
+            <p>(${cs.msgAnnotated})</p>
+            <table>
+              <j:forEach var="p" items="${cs.affectedFiles}">
+                <tr>
+                  <td width="10%">${spc}${p.editType.name}</td>
+                  <td><tt>${p.path}</tt></td>
+                </tr>
+              </j:forEach>
+            </table>
           </j:forEach>
           <j:if test="${!hadChanges}">
-            <tr>
-              <td colspan="2">No Changes</td>
-            </tr>
+            <p>No Changes</p>
           </j:if>
-        </table>
         <br />
       </j:if>
     </div>
@@ -195,17 +184,13 @@
       <j:set var="artifacts" value="${build.artifacts}" />
       <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
         <h1>Build Artifacts</h1>
-        <table width="100%">
-          <tr>
-            <td>
-              <j:forEach var="f" items="${artifacts}">
-                <li>
-                  <a href="${rooturl}${build.url}artifact/${f}">${f}</a>
-                </li>
-              </j:forEach>
-            </td>
-          </tr>
-        </table>
+          <ul>
+            <j:forEach var="f" items="${artifacts}">
+              <li>
+                <a href="${rooturl}${build.url}artifact/${f}">${f}</a>
+              </li>
+            </j:forEach>
+          </ul>
         <br />
       </j:if>
 
@@ -213,29 +198,21 @@
       <j:set var="mbuilds" value="${build.moduleBuilds}" />
       <j:if test="${mbuilds!=null}">
         <h1>Build Artifacts</h1>
-        <table width="100%">
-          <j:forEach var="m" items="${mbuilds}">
-            <tr>
-              <td class="bg2">
-                <b>${m.key.displayName}</b>
-              </td>
-            </tr>
-            <j:forEach var="mvnbld" items="${m.value}">
-              <j:set var="artifacts" value="${mvnbld.artifacts}" />
-              <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
-                <tr>
-                  <td>
-                    <j:forEach var="f" items="${artifacts}">
-                      <li>
-                        <a href="${rooturl}${mvnbld.url}artifact/${f}">${f}</a>
-                      </li>
-                    </j:forEach>
-                  </td>
-                </tr>
-              </j:if>
-            </j:forEach>
+        <j:forEach var="m" items="${mbuilds}">
+          <h2>${m.key.displayName}</h2>
+          <j:forEach var="mvnbld" items="${m.value}">
+            <j:set var="artifacts" value="${mvnbld.artifacts}" />
+            <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
+              <ul>
+                <j:forEach var="f" items="${artifacts}">
+                  <li>
+                    <a href="${rooturl}${mvnbld.url}artifact/${f}">${f}</a>
+                  </li>
+                </j:forEach>
+              </ul>
+            </j:if>
           </j:forEach>
-        </table>
+        </j:forEach>
       </j:if>
     </div>
     <div class="content">
