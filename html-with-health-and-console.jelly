@@ -46,8 +46,8 @@
     td.test_skipped {
     color:grey;
     }
-    td.console {
-    font-family:Courier New, monotype;
+    .console {
+    font: normal normal 90% Courier New, monotype;
     }
     div.content, div.header {
     width: 90%;
@@ -135,22 +135,24 @@
         <a href="${rooturl}${build.url}/changes">
           <h1>Changes</h1>
         </a>
-          <j:forEach var="cs" items="${changeSet.logs}" varStatus="loop">
-            <j:set var="hadChanges" value="true" />
-            <h2>${spc}Revision ${cs.revision} by ${cs.author}</h2>
-            <p>(${cs.msgAnnotated})</p>
-            <table>
-              <j:forEach var="p" items="${cs.affectedFiles}">
-                <tr>
-                  <td width="10%">${spc}${p.editType.name}</td>
-                  <td><tt>${p.path}</tt></td>
-                </tr>
-              </j:forEach>
-            </table>
-          </j:forEach>
-          <j:if test="${!hadChanges}">
-            <p>No Changes</p>
-          </j:if>
+        <j:forEach var="cs" items="${changeSet.logs}" varStatus="loop">
+          <j:set var="hadChanges" value="true" />
+          <h2>${spc}Revision ${cs.revision} by ${cs.author}</h2>
+          <p>(${cs.msgAnnotated})</p>
+          <table>
+            <j:forEach var="p" items="${cs.affectedFiles}">
+              <tr>
+                <td width="10%">${spc}${p.editType.name}</td>
+                <td>
+                  <tt>${p.path}</tt>
+                </td>
+              </tr>
+            </j:forEach>
+          </table>
+        </j:forEach>
+        <j:if test="${!hadChanges}">
+          <p>No Changes</p>
+        </j:if>
         <br />
       </j:if>
     </div>
@@ -179,24 +181,26 @@
         <br />
       </j:if>
     </div>
-    <div class="content">
-      <!-- ARTIFACTS -->
-      <j:set var="artifacts" value="${build.artifacts}" />
-      <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
-        <h1>Build Artifacts</h1>
-          <ul>
-            <j:forEach var="f" items="${artifacts}">
-              <li>
-                <a href="${rooturl}${build.url}artifact/${f}">${f}</a>
-              </li>
-            </j:forEach>
-          </ul>
-        <br />
-      </j:if>
 
-      <!-- MAVEN ARTIFACTS -->
-      <j:set var="mbuilds" value="${build.moduleBuilds}" />
-      <j:if test="${mbuilds!=null}">
+    <!-- ARTIFACTS -->
+    <j:set var="artifacts" value="${build.artifacts}" />
+    <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
+      <div class="content">
+        <h1>Build Artifacts</h1>
+        <ul>
+          <j:forEach var="f" items="${artifacts}">
+            <li>
+              <a href="${rooturl}${build.url}artifact/${f}">${f}</a>
+            </li>
+          </j:forEach>
+        </ul>
+      </div>
+    </j:if>
+
+    <!-- MAVEN ARTIFACTS -->
+    <j:set var="mbuilds" value="${build.moduleBuilds}" />
+    <j:if test="${mbuilds!=null}">
+      <div class="content">
         <h1>Build Artifacts</h1>
         <j:forEach var="m" items="${mbuilds}">
           <h2>${m.key.displayName}</h2>
@@ -213,13 +217,13 @@
             </j:if>
           </j:forEach>
         </j:forEach>
-      </j:if>
-    </div>
-    <div class="content">
-      <!-- JUnit TEMPLATE -->
-      <j:set var="junitResultList" value="${it.JUnitTestResult}" />
-      <j:if test="${junitResultList.isEmpty()!=true}">
-        <a name="junit" />
+        <br />
+      </div>
+    </j:if>
+    <!-- JUnit TEMPLATE -->
+    <j:set var="junitResultList" value="${it.JUnitTestResult}" />
+    <j:if test="${junitResultList.isEmpty()!=true}">
+      <div class="content">
         <a href="${rooturl}${build.url}/testReport">
           <h1>JUnit Tests</h1>
         </a>
@@ -254,12 +258,14 @@
             </j:forEach>
           </j:forEach>
         </table>
-      </j:if>
-    </div>
-    <div class="content">
-      <!-- COBERTURA TEMPLATE -->
-      <j:set var="coberturaAction" value="${it.coberturaAction}" />
-      <j:if test="${coberturaAction!=null}">
+        <br />
+      </div>
+    </j:if>
+
+    <!-- COBERTURA TEMPLATE -->
+    <j:set var="coberturaAction" value="${it.coberturaAction}" />
+    <j:if test="${coberturaAction!=null}">
+      <div class="content">
         <j:set var="coberturaResult" value="${coberturaAction.result}" />
         <j:if test="${coberturaResult!=null}">
           <a href="${rooturl}${build.url}/cobertura">
@@ -339,20 +345,18 @@
           </j:forEach>
         </j:if>
         <br />
-      </j:if>
-    </div>
+      </div>
+    </j:if>
     <div class="content">
       <!-- CONSOLE OUTPUT -->
       <a href="${rooturl}${build.url}/console">
         <h1>Console Output</h1>
       </a>
-      <table width="100%" cellpadding="0" cellspacing="0">
+      <pre class="console">
         <j:forEach var="line" items="${build.getLog(50)}">
-          <tr>
-            <td class="console">${line}</td>
-          </tr>
+          ${line}
         </j:forEach>
-      </table>
+      </pre>
       <br />
     </div>
   </body>
