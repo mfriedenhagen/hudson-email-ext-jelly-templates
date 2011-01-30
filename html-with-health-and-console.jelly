@@ -354,7 +354,7 @@
       </a>
       <pre class="console">
         <j:forEach var="line" items="${build.getLog(50)}">
-          ${line}<br/ >
+          ${line}<br />
         </j:forEach>
       </pre>
       <br />
