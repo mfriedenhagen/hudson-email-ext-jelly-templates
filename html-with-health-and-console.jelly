@@ -3,8 +3,6 @@
     body table, td, th, p, h1, h2 {
     margin:0;
     font:normal normal 100% Georgia,Serif;
-    background:#ffffff;
-    color:#000000;
     }
     body {
     background: #f5f5dc;
@@ -127,8 +125,35 @@
         </tr>
       </table>
     </div>
+
+    <!-- HEALTH TEMPLATE -->
     <div class="content">
-      <!-- CHANGE SET -->
+      <j:set var="healthIconSize" value="16x16" />
+      <j:set var="healthReports" value="${project.buildHealthReports}" />
+      <j:if test="${healthReports!=null}">
+        <h1>Health Report</h1>
+        <table>
+          <tr>
+            <th>W</th>
+            <th>Description</th>
+            <th>Score</th>
+          </tr>
+          <j:forEach var="healthReport" items="${healthReports}">
+            <tr>
+              <td>
+                <img src="${rooturl}${healthReport.getIconUrl(healthIconSize)}" />
+              </td>
+              <td>${healthReport.description}</td>
+              <td>${healthReport.score}</td>
+            </tr>
+          </j:forEach>
+        </table>
+        <br />
+      </j:if>
+    </div>
+
+    <!-- CHANGE SET -->
+    <div class="content">
       <j:set var="changeSet" value="${build.changeSet}" />
       <j:if test="${changeSet!=null}">
         <j:set var="hadChanges" value="false" />
@@ -153,31 +178,6 @@
         <j:if test="${!hadChanges}">
           <p>No Changes</p>
         </j:if>
-        <br />
-      </j:if>
-    </div>
-    <div class="content">
-      <!-- HEALTH TEMPLATE -->
-      <j:set var="healthIconSize" value="16x16" />
-      <j:set var="healthReports" value="${project.buildHealthReports}" />
-      <j:if test="${healthReports!=null}">
-        <h1>Health Report</h1>
-        <table>
-          <tr>
-            <th>W</th>
-            <th>Description</th>
-            <th>Score</th>
-          </tr>
-          <j:forEach var="healthReport" items="${healthReports}">
-            <tr>
-              <td>
-                <img src="${rooturl}${healthReport.getIconUrl(healthIconSize)}" />
-              </td>
-              <td>${healthReport.description}</td>
-              <td>${healthReport.score}</td>
-            </tr>
-          </j:forEach>
-        </table>
         <br />
       </j:if>
     </div>
@@ -352,11 +352,13 @@
       <a href="${rooturl}${build.url}/console">
         <h1>Console Output</h1>
       </a>
-      <pre class="console">
-<j:forEach var="line" items="${build.getLog(50)}">
-${line}<br />
-</j:forEach>
-      </pre>
+      <table>
+        <j:forEach var="line" items="${build.getLog(50)}">
+        <tr>
+            <td class="console">${line}</td>
+        </tr>
+        </j:forEach>
+      </table>
       <br />
     </div>
   </body>
