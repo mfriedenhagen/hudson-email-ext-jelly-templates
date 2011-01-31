@@ -43,6 +43,8 @@
     }
     .console {
     font: normal normal 90% Courier New, monotype;
+    padding:0px;
+    margin:0px;
     }
     div.content, div.header {
     width: 90%;
@@ -349,10 +351,10 @@
       <a href="${rooturl}${build.url}/console">
         <h1>Console Output</h1>
       </a>
-      <table>
+      <table class="console">
         <j:forEach var="line" items="${build.getLog(50)}">
         <tr>
-            <td class="console">${line}</td>
+            <td><tt>${line}</tt></td>
         </tr>
         </j:forEach>
       </table>
