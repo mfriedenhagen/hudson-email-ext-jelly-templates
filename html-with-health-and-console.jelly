@@ -17,6 +17,9 @@
           font: normal bold 130% Georgia,Serif;
           background-color:#f0f0f0;
           }
+          tr.gray {
+          background-color:#f0f0f0;
+          }
           h2 {
           padding:5px;
           margin-top:5px;
@@ -67,7 +70,7 @@
       <j:set var="spc" value="&amp;nbsp;&amp;nbsp;" />
       <!-- GENERAL INFO -->
       <table>
-        <tr>
+        <tr class="gray">
           <td align="right">
             <j:choose>
               <j:when test="${build.result=='SUCCESS'}">
