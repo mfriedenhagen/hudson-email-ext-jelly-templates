@@ -164,8 +164,8 @@
         </a>
         <j:forEach var="cs" items="${changeSet.logs}" varStatus="loop">
           <j:set var="hadChanges" value="true" />
-          <h2>${spc}Revision ${cs.revision} by ${cs.author}</h2>
-          <p>(${cs.msgAnnotated})</p>
+          <h2>${cs.msgAnnotated}</h2>
+          <p>by <em>${cs.author}</em></p>
           <table>
             <j:forEach var="p" items="${cs.affectedFiles}">
               <tr>
